@@ -21,7 +21,7 @@ from ds_specific_constants import TWEET_REVIEW_TXT_COLUMN
 from ds_specific_constants import TWEET_LABEL_COLUMN
 
 
-class TweetReviewTfTensorDsAndPrepareBatches(DataSetBase):
+class TweetReviewDS(DataSetBase):
 
     def __init__(self,
                  pd_data_frame_ds: DataSetBase,
