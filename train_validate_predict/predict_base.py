@@ -16,17 +16,7 @@
 import abc
 
 
-class TrainValidateBase(abc.ABC):
-
-    @abc.abstractmethod
-    def train(self):
-        pass
-
+class PredictBase:
     @abc.abstractmethod
     def predict(self, input_data):
         pass
-
-    @abc.abstractmethod
-    def evaluate(self):
-        pass
-

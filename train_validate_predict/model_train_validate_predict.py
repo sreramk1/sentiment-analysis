@@ -16,6 +16,7 @@
 import numpy as np
 import tensorflow as tf
 
+from train_validate_predict.predict_base import PredictBase
 from train_validate_predict.train_validate_base import TrainValidateBase
 from train_validate_predict.dataset_base import DataSetBase
 
@@ -32,7 +33,7 @@ def default_metrics():
     return ['accuracy']
 
 
-class TrainSentimentModel(TrainValidateBase):
+class ModelTrainValidatePredict(TrainValidateBase, PredictBase):
 
     def __init__(self,
                  tf_dataset: DataSetBase,
