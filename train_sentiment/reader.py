@@ -17,6 +17,10 @@
 import abc
 
 
+NotYetLoadedDataFromFileError = Exception(" Dataset was uninitialized." 
+                                          "Attempted to retrieve data before loading it.")
+
+
 class DsReader(abc.ABC):
 
     @abc.abstractmethod
@@ -25,4 +29,8 @@ class DsReader(abc.ABC):
 
     @abc.abstractmethod
     def get_dataset(self):
+        """
+        :raises NotYetLoadedDataFromFileError if it was called before retrieving the data.
+        :return:
+        """
         pass

@@ -15,33 +15,66 @@
 
 import tensorflow as tf
 
-from server.model_ds_abst import ModelBuilderBase
+from train_sentiment.model_ds_abst import ModelBuilderBase
+from train_sentiment.model_ds_abst import DataSetBase
 
 
 class SentimentLSTMDense64Dense32Dense16Dense8Dense1(ModelBuilderBase):
 
-    def __init__(self):
-        pass
-        # # VOCAB_SIZE = 1000
-        # encoder = tf.keras.layers.TextVectorization()
-        # # max_tokens=VOCAB_SIZE)
-        # encoder.adapt(train_dataset_batched_tf.map(lambda text, label: text))
-        #
-        # model = tf.keras.Sequential([
-        #     encoder,
-        #     tf.keras.layers.Embedding(
-        #         input_dim=len(encoder.get_vocabulary()),
-        #         output_dim=64,
-        #         # Use masking to handle the variable sequence lengths
-        #         mask_zero=True),
-        #     tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)),
-        #
-        #     tf.keras.layers.Dense(64, activation='relu'),
-        #     tf.keras.layers.Dense(32, activation='relu'),
-        #     tf.keras.layers.Dense(16, activation='relu'),
-        #     tf.keras.layers.Dense(8, activation='relu'),
-        #     tf.keras.layers.Dense(1)  # , activation='sigmoid')
-        # ])
+    def __init__(self,
+                 tf_ds_database: DataSetBase,
+                 max_tokens=None):
+        self.__max_tokens = max_tokens
+        self.__tf_ds_database = tf_ds_database
+        self.__encoder = None
+        self.__model = None
+
+    def __clear(self):
+        self.__encoder = None
+
+    def __create_encoder(self):
+        self.__encoder = tf.keras.layers.TextVectorization(max_tokens=self.__max_tokens)
+        self.__encoder.adapt(self.__tf_ds_database.prepare_and_get_train_ds().map(lambda text, label: text))
+        return self.__encoder
 
     def build_model(self):
-        pass
+        if self.__encoder is None:
+            encoder = self.__create_encoder()
+
+            embedding_vocabulary_size = len(encoder.get_vocabulary())
+            embedding_output_dimensions = 64
+            mask_zero = True
+
+            dense_layer_1_units = 64
+            dense_layer_2_units = 32
+            dense_layer_3_units = 16
+            dense_layer_4_units = 8
+            dense_layer_5_output_layer_units = 1
+
+            dense_activation = "relu"
+
+            self.__model = tf.keras.Sequential([
+                encoder,
+                tf.keras.layers.Embedding(
+                    input_dim=embedding_vocabulary_size,
+                    output_dim=embedding_output_dimensions,
+                    # Use masking to handle the variable sequence lengths
+                    mask_zero=mask_zero),
+                tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)),
+
+                tf.keras.layers.Dense(dense_layer_1_units, activation=dense_activation),
+                tf.keras.layers.Dense(dense_layer_2_units, activation=dense_activation),
+                tf.keras.layers.Dense(dense_layer_3_units, activation=dense_activation),
+                tf.keras.layers.Dense(dense_layer_4_units, activation=dense_activation),
+                tf.keras.layers.Dense(dense_layer_5_output_layer_units)  # , activation='sigmoid')
+            ])
+            return True
+
+        return False
+
+    def force_rebuild_model(self):
+        self.__encoder = None
+        self.build_model()
+
+    def get_model(self):
+        return self.__model

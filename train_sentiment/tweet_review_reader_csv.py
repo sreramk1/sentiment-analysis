@@ -16,6 +16,7 @@
 import pandas as pd
 
 from reader import DsReader
+from reader import NotYetLoadedDataFromFileError
 
 
 class TweetReviewReaderCSV(DsReader):
@@ -29,5 +30,5 @@ class TweetReviewReaderCSV(DsReader):
 
     def get_dataset(self):
         if self.__dataset is None:
-            raise Exception("Forbidden call. Dataset was uninitialized")
-
+            raise NotYetLoadedDataFromFileError
+        return self.__dataset

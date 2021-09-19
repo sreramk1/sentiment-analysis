@@ -36,8 +36,21 @@ class DataSetBase(abc.ABC):
 
 
 class ModelBuilderBase(abc.ABC):
+
     @abc.abstractmethod
     def build_model(self):
+        """
+
+        :return: True when build was success
+        """
+        pass
+
+    @abc.abstractmethod
+    def force_rebuild_model(self):
+        pass
+
+    @abc.abstractmethod
+    def get_model(self):
         pass
 
 

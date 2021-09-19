@@ -15,13 +15,13 @@
 
 import tensorflow as tf
 
-from server.model_ds_abst import DataSetBase
+from train_sentiment.model_ds_abst import DataSetBase
 
 from ds_specific_constants import TWEET_REVIEW_TXT_COLUMN
 from ds_specific_constants import TWEET_LABEL_COLUMN
 
 
-class TweetReviewTfTensorDs(DataSetBase):
+class TweetReviewTfTensorDsAndPrepareBatches(DataSetBase):
 
     def __init__(self,
                  pd_data_frame_ds: DataSetBase,
