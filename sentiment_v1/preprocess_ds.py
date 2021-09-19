@@ -26,7 +26,7 @@ from ds_specific_constants import TWEET_LABEL_COLUMN
 from train_validate_predict.reader import DsReader
 
 
-class TweetReviewToPdDataFrame(DataSetBase):
+class TweetReviewCsvToPdDataFrame(DataSetBase):
 
     def __init__(self,
                  ds_reader: DsReader,
@@ -93,15 +93,15 @@ class TweetReviewToPdDataFrame(DataSetBase):
         self.__dataset_processed = pd.DataFrame.copy(self.__dataset, deep=True)
 
         self.__dataset_processed[self.__twt_txt] = self.__dataset_processed[self.__twt_txt].apply(
-            TweetReviewToPdDataFrame.__gen_strip_words_starting_with_filter(filter_str='@')
+            TweetReviewCsvToPdDataFrame.__gen_strip_words_starting_with_filter(filter_str='@')
         )
 
         self.__dataset_processed[self.__twt_txt] = self.__dataset_processed[self.__twt_txt].apply(
-            TweetReviewToPdDataFrame.__gen_strip_words_starting_with_filter(filter_str='#')
+            TweetReviewCsvToPdDataFrame.__gen_strip_words_starting_with_filter(filter_str='#')
         )
 
         self.__dataset_processed[self.__twt_txt] = self.__dataset_processed[self.__twt_txt].apply(
-            TweetReviewToPdDataFrame.__gen_filter_numbers(replace_with=' ')
+            TweetReviewCsvToPdDataFrame.__gen_filter_numbers(replace_with=' ')
         )
 
         self.__dataset_processed[self.__twt_lbl] = self.__dataset_processed[self.__twt_lbl].apply(
@@ -145,4 +145,4 @@ class TweetReviewToPdDataFrame(DataSetBase):
 
 
 if __name__ == "__main__":
-    print(TweetReviewToPdDataFrame._TweetReviewReaderCSV__filter_numbers("hello world a23344b ", replace_with=''))
+    print(TweetReviewCsvToPdDataFrame._TweetReviewReaderCSV__filter_numbers("hello world a23344b ", replace_with=''))
