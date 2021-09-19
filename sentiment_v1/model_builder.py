@@ -15,8 +15,8 @@
 
 import tensorflow as tf
 
-from train_sentiment.model_train_ds_abst import ModelBuilderBase
-from train_sentiment.model_train_ds_abst import DataSetBase
+from train.model_train_ds_abst import ModelBuilderBase
+from train.model_train_ds_abst import DataSetBase
 
 
 class SentimentLSTMDense64Dense32Dense16Dense8Dense1(ModelBuilderBase):

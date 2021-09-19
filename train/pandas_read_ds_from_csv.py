@@ -15,11 +15,11 @@
 
 import pandas as pd
 
-from reader import DsReader
-from reader import NotYetLoadedDataFromFileError
+from train.reader import DsReader
+from train.reader import NotYetLoadedDataFromFileError
 
 
-class TweetReviewReaderCSV(DsReader):
+class PandasReadDatasetFromCSV(DsReader):
 
     def __init__(self, csv_path):
         self.__csv_path = csv_path

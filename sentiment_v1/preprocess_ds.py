@@ -16,14 +16,14 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from train_sentiment.model_train_ds_abst import DataSetBase
+from train.model_train_ds_abst import DataSetBase
 
 from ds_specific_constants import POSITIVE_LABEL
 from ds_specific_constants import NEGATIVE_LABEL
 from ds_specific_constants import TWEET_REVIEW_TXT_COLUMN
 from ds_specific_constants import TWEET_LABEL_COLUMN
 
-from reader import DsReader
+from train.reader import DsReader
 
 
 class TweetReviewPdDataFrameDS(DataSetBase):
