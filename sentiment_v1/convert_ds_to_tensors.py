@@ -25,8 +25,8 @@ class TweetReviewTfDataset(DataSetBase):
 
     def __init__(self,
                  pd_data_frame_ds: DataSetBase,
-                 shuffle_buffer_size,
-                 batch_size,
+                 shuffle_buffer_size=1000,
+                 batch_size=64,
                  prefetch_size=tf.data.AUTOTUNE,
                  tweet_review_txt_column=TWEET_REVIEW_TXT_COLUMN,
                  tweet_label_column=TWEET_LABEL_COLUMN):
