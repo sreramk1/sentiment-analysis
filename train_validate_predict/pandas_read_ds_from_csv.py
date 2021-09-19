@@ -15,8 +15,8 @@
 
 import pandas as pd
 
-from train.reader import DsReader
-from train.reader import NotYetLoadedDataFromFileError
+from train_validate_predict.reader import DsReader
+from train_validate_predict.reader import NotYetLoadedDataFromFileError
 
 
 class PandasReadDatasetFromCSV(DsReader):

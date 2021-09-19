@@ -16,17 +16,17 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from train.model_train_ds_abst import DataSetBase
+from train_validate_predict.dataset_base import DataSetBase
 
 from ds_specific_constants import POSITIVE_LABEL
 from ds_specific_constants import NEGATIVE_LABEL
 from ds_specific_constants import TWEET_REVIEW_TXT_COLUMN
 from ds_specific_constants import TWEET_LABEL_COLUMN
 
-from train.reader import DsReader
+from train_validate_predict.reader import DsReader
 
 
-class TweetReviewPdDataFrameDS(DataSetBase):
+class TweetReviewToPdDataFrame(DataSetBase):
 
     def __init__(self,
                  ds_reader: DsReader,
@@ -93,15 +93,15 @@ class TweetReviewPdDataFrameDS(DataSetBase):
         self.__dataset_processed = pd.DataFrame.copy(self.__dataset, deep=True)
 
         self.__dataset_processed[self.__twt_txt] = self.__dataset_processed[self.__twt_txt].apply(
-            TweetReviewPdDataFrameDS.__gen_strip_words_starting_with_filter(filter_str='@')
+            TweetReviewToPdDataFrame.__gen_strip_words_starting_with_filter(filter_str='@')
         )
 
         self.__dataset_processed[self.__twt_txt] = self.__dataset_processed[self.__twt_txt].apply(
-            TweetReviewPdDataFrameDS.__gen_strip_words_starting_with_filter(filter_str='#')
+            TweetReviewToPdDataFrame.__gen_strip_words_starting_with_filter(filter_str='#')
         )
 
         self.__dataset_processed[self.__twt_txt] = self.__dataset_processed[self.__twt_txt].apply(
-            TweetReviewPdDataFrameDS.__gen_filter_numbers(replace_with=' ')
+            TweetReviewToPdDataFrame.__gen_filter_numbers(replace_with=' ')
         )
 
         self.__dataset_processed[self.__twt_lbl] = self.__dataset_processed[self.__twt_lbl].apply(
@@ -145,4 +145,4 @@ class TweetReviewPdDataFrameDS(DataSetBase):
 
 
 if __name__ == "__main__":
-    print(TweetReviewPdDataFrameDS._TweetReviewReaderCSV__filter_numbers("hello world a23344b ", replace_with=''))
+    print(TweetReviewToPdDataFrame._TweetReviewReaderCSV__filter_numbers("hello world a23344b ", replace_with=''))

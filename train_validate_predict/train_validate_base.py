@@ -16,47 +16,6 @@
 import abc
 
 
-class DataSetBase(abc.ABC):
-
-    @abc.abstractmethod
-    def prepare_and_get_train_ds(self):
-        pass
-
-    @abc.abstractmethod
-    def prepare_and_get_validate_ds(self):
-        pass
-
-    @abc.abstractmethod
-    def reset(self):
-        """
-        reset resets the dataset, clearing all the internal caches.
-        :return:
-        """
-        pass
-
-
-class ModelBuilderBase(abc.ABC):
-    """
-    Note: the class implementing this must not compile the tensorflow model.
-    The compilation should be done by the trainer.
-    """
-    @abc.abstractmethod
-    def build_model(self):
-        """
-
-        :return: True when build was success
-        """
-        pass
-
-    @abc.abstractmethod
-    def force_rebuild_model(self):
-        pass
-
-    @abc.abstractmethod
-    def get_model(self):
-        pass
-
-
 class TrainValidateBase(abc.ABC):
 
     @abc.abstractmethod

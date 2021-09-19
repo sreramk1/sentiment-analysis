@@ -16,8 +16,8 @@
 import numpy as np
 import tensorflow as tf
 
-from train.model_train_ds_abst import TrainValidateBase
-from train.model_train_ds_abst import DataSetBase
+from train_validate_predict.train_validate_base import TrainValidateBase
+from train_validate_predict.dataset_base import DataSetBase
 
 
 def default_loss():

@@ -15,7 +15,7 @@
 
 import tensorflow as tf
 
-from train.model_train_ds_abst import DataSetBase
+from train_validate_predict.dataset_base import DataSetBase
 
 from ds_specific_constants import TWEET_REVIEW_TXT_COLUMN
 from ds_specific_constants import TWEET_LABEL_COLUMN
