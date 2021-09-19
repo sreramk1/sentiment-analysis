@@ -82,7 +82,7 @@ class ModelTrainValidatePredict(TrainValidateBase, PredictBase):
 
     def predict(self, input_data):
         self.__compile_if_not_already_compiled()
-        return self.__model.get_model().predict(np.array([input_data]))
+        return self.__model.predict(np.array([input_data]))
 
     def evaluate(self):
         self.__compile_if_not_already_compiled()
