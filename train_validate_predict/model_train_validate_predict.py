@@ -81,8 +81,10 @@ class ModelTrainValidatePredict(TrainValidateBase, PredictBase):
                                 validation_steps=self.__train_validation_steps)
 
     def predict(self, input_data):
+        self.__compile_if_not_already_compiled()
         return self.__model.get_model().predict(np.array([input_data]))
 
     def evaluate(self):
+        self.__compile_if_not_already_compiled()
         validate_loss, validate_acc = self.__model.evaluate(self.__tf_dataset.prepare_and_get_validate_ds())
         return validate_loss, validate_acc
