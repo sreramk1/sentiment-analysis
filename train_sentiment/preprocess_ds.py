@@ -11,7 +11,7 @@ from ds_specific_constants import TWEET_LABEL_COLUMN
 from reader import DsReader
 
 
-class TweetReviewReaderCSV(DataSetBase):
+class TweetReviewPdDataFrameDS(DataSetBase):
 
     def __init__(self,
                  ds_reader: DsReader,
@@ -27,7 +27,7 @@ class TweetReviewReaderCSV(DataSetBase):
         self.__p_lbl = positive_label
         self.__n_lbl = negative_label
         self.__twt_txt = tweet_review_txt_column
-        self.__txt_lbl = tweet_label_column
+        self.__twt_lbl = tweet_label_column
 
         self.__train_validate_split_ratio = train_validate_split_ratio
 
@@ -72,41 +72,49 @@ class TweetReviewReaderCSV(DataSetBase):
 
     def __preprocess_dataset(self):
 
-        if self.__dataset_processed is None:
-            self.__dataset_processed = pd.DataFrame.copy(self.__dataset, deep=True)
+        if self.__dataset is None:
+            raise Exception("expected __dataset to be set, before a call to __preprocess_dataset()")
 
-            self.__dataset_processed[self.__twt_txt] = self.__dataset_processed[self.__twt_txt].apply(
-                    TweetReviewReaderCSV.__gen_strip_words_starting_with_filter(filter_str='@')
-                )
+        self.__dataset_processed = pd.DataFrame.copy(self.__dataset, deep=True)
 
-            self.__dataset_processed[self.__twt_txt] = self.__dataset_processed[self.__twt_txt].apply(
-                    TweetReviewReaderCSV.__gen_strip_words_starting_with_filter(filter_str='#')
-                )
+        self.__dataset_processed[self.__twt_txt] = self.__dataset_processed[self.__twt_txt].apply(
+            TweetReviewPdDataFrameDS.__gen_strip_words_starting_with_filter(filter_str='@')
+        )
 
-            self.__dataset_processed[self.__twt_txt] = self.__dataset_processed[self.__twt_txt].apply(
-                    TweetReviewReaderCSV.__gen_filter_numbers(replace_with=' ')
-                )
+        self.__dataset_processed[self.__twt_txt] = self.__dataset_processed[self.__twt_txt].apply(
+            TweetReviewPdDataFrameDS.__gen_strip_words_starting_with_filter(filter_str='#')
+        )
 
-            self.__dataset_processed[self.__txt_lbl] = self.__dataset_processed[self.__txt_lbl].apply(
-                    self.__gen_process_label()
-                )
+        self.__dataset_processed[self.__twt_txt] = self.__dataset_processed[self.__twt_txt].apply(
+            TweetReviewPdDataFrameDS.__gen_filter_numbers(replace_with=' ')
+        )
+
+        self.__dataset_processed[self.__twt_lbl] = self.__dataset_processed[self.__twt_lbl].apply(
+            self.__gen_process_label()
+        )
 
     def __train_validate_split(self):
         if self.__dataset_processed is None:
             raise Exception("expected __dataset_processed to be set. Call __preprocess_dataset() " +
                             "before calling the method __train_validate_split()")
-        self.__train_ds, self.__validate_ds = train_test_split(self.__dataset_processed, test_size=0.2)
+        self.__train_ds, self.__validate_ds = train_test_split(self.__dataset_processed,
+                                                               test_size=self.__train_validate_split_ratio)
+
+    def __clear_ds_preprocess(self):
+        self.__dataset = None
+        self.__dataset_processed = None
 
     def __prepare_ds(self):
-        if self.__dataset is None:
+        if self.__train_ds is None or self.__validate_ds is None:
+
             self.__ds_reader.load_dataset()
             self.__dataset = self.__ds_reader.get_dataset()
 
-        if self.__dataset_processed is None:
             self.__preprocess_dataset()
 
-        if self.__train_ds is None or self.__validate_ds is None:
             self.__train_validate_split()
+
+            self.__clear_ds_preprocess()
 
     def prepare_and_get_train_ds(self):
         self.__prepare_ds()
@@ -116,7 +124,10 @@ class TweetReviewReaderCSV(DataSetBase):
         self.__prepare_ds()
         return self.__validate_ds
 
+    def reset(self):
+        self.__train_ds = None
+        self.__validate_ds = None
+
 
 if __name__ == "__main__":
-
-    print(TweetReviewReaderCSV._TweetReviewReaderCSV__filter_numbers("hello world a23344b ", replace_with=''))
+    print(TweetReviewPdDataFrameDS._TweetReviewReaderCSV__filter_numbers("hello world a23344b ", replace_with=''))

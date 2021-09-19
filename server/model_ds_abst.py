@@ -11,6 +11,14 @@ class DataSetBase(abc.ABC):
     def prepare_and_get_validate_ds(self):
         pass
 
+    @abc.abstractmethod
+    def reset(self):
+        """
+        reset resets the dataset, clearing all the internal caches.
+        :return:
+        """
+        pass
+
 
 class ModelBuilderBase(abc.ABC):
     @abc.abstractmethod
