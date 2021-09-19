@@ -15,17 +15,17 @@
 
 import tensorflow as tf
 
-from train_sentiment.model_ds_abst import ModelBuilderBase
-from train_sentiment.model_ds_abst import DataSetBase
+from train_sentiment.model_train_ds_abst import ModelBuilderBase
+from train_sentiment.model_train_ds_abst import DataSetBase
 
 
 class SentimentLSTMDense64Dense32Dense16Dense8Dense1(ModelBuilderBase):
 
     def __init__(self,
-                 tf_ds_database: DataSetBase,
+                 tf_ds_store: DataSetBase,
                  max_tokens=None):
         self.__max_tokens = max_tokens
-        self.__tf_ds_database = tf_ds_database
+        self.__tf_ds_store = tf_ds_store
         self.__encoder = None
         self.__model = None
 
@@ -34,7 +34,7 @@ class SentimentLSTMDense64Dense32Dense16Dense8Dense1(ModelBuilderBase):
 
     def __create_encoder(self):
         self.__encoder = tf.keras.layers.TextVectorization(max_tokens=self.__max_tokens)
-        self.__encoder.adapt(self.__tf_ds_database.prepare_and_get_train_ds().map(lambda text, label: text))
+        self.__encoder.adapt(self.__tf_ds_store.prepare_and_get_train_ds().map(lambda text, label: text))
         return self.__encoder
 
     def build_model(self):

@@ -36,7 +36,10 @@ class DataSetBase(abc.ABC):
 
 
 class ModelBuilderBase(abc.ABC):
-
+    """
+    Note: the class implementing this must not compile the tensorflow model.
+    The compilation should be done by the trainer.
+    """
     @abc.abstractmethod
     def build_model(self):
         """
@@ -61,7 +64,11 @@ class TrainValidateBase(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def predict(self, input_data) -> float:
+    def predict(self, input_data):
+        pass
+
+    @abc.abstractmethod
+    def evaluate(self):
         pass
 
 
