@@ -18,10 +18,10 @@ from sklearn.model_selection import train_test_split
 
 from train_validate_predict.dataset_base import DataSetBase
 
-from ds_specific_constants import POSITIVE_LABEL
-from ds_specific_constants import NEGATIVE_LABEL
-from ds_specific_constants import TWEET_REVIEW_TXT_COLUMN
-from ds_specific_constants import TWEET_LABEL_COLUMN
+from sentiment_v1.ds_specific_constants import POSITIVE_LABEL
+from sentiment_v1.ds_specific_constants import NEGATIVE_LABEL
+from sentiment_v1.ds_specific_constants import TWEET_REVIEW_TXT_COLUMN
+from sentiment_v1.ds_specific_constants import TWEET_LABEL_COLUMN
 
 from train_validate_predict.reader import DsReader
 

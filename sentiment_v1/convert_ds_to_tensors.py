@@ -17,8 +17,8 @@ import tensorflow as tf
 
 from train_validate_predict.dataset_base import DataSetBase
 
-from ds_specific_constants import TWEET_REVIEW_TXT_COLUMN
-from ds_specific_constants import TWEET_LABEL_COLUMN
+from sentiment_v1.ds_specific_constants import TWEET_REVIEW_TXT_COLUMN
+from sentiment_v1.ds_specific_constants import TWEET_LABEL_COLUMN
 
 
 class TweetReviewTfDataset(DataSetBase):
