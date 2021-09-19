@@ -57,10 +57,6 @@ class ModelBuilderBase(abc.ABC):
 class TrainValidateBase(abc.ABC):
 
     @abc.abstractmethod
-    def set_config(self, config):
-        pass
-
-    @abc.abstractmethod
     def train(self):
         pass
 
