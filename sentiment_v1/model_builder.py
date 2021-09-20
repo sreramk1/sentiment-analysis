@@ -14,6 +14,7 @@
 ##########################################################################
 
 import tensorflow as tf
+import numpy as np
 
 from train_validate_predict.model_builder_base import ModelBuilderBase
 from train_validate_predict.dataset_base import DataSetBase
@@ -34,7 +35,12 @@ class SentimentLSTMDense64Dense32Dense16Dense8Dense1(ModelBuilderBase):
 
     def __create_encoder(self):
         self.__encoder = tf.keras.layers.TextVectorization(max_tokens=self.__max_tokens)
-        self.__encoder.adapt(self.__tf_ds_store.prepare_and_get_train_ds().map(lambda text, label: text))
+
+        if self.__tf_ds_store is None:
+            self.__encoder.adapt(np.array([['placeholder']], dtype=np.object), batch_size=None)
+        else:
+            self.__encoder.adapt(self.__tf_ds_store.prepare_and_get_train_ds().map(lambda text, label: text))
+
         return self.__encoder
 
     def build_model(self):
