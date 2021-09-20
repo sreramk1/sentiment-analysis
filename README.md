@@ -19,7 +19,55 @@ updating the weight values without really making it hard for the gradients to pa
 ## Final metrics from model training and testing
 
 As we can see from the second Notebook: The last training loss was `loss: 0.0184` with the accuracy being 
-`accuracy: 0.995`. The measured test-loss that was obtained was: `loss: 0.1755 - accuracy: 0.9545`. 
+`accuracy: 0.995`. The measured test-loss that was obtained was: `loss: 0.1755 - accuracy: 0.9545`.
 
+### Results from a few evaluations:
+(The query was executed from the Server, by making the HTTP GET calls through the browser)
+1. Query URL: `http://127.0.0.1:8000/predict?review_qry_string=%22This%20is%20a%20great%20business!%22`. Query string:
+"This is a great business!". Result: `{"prediction_label":"positive","prediction_confidence":2.872779130935669}`. 
+HTTP Response header:
+```
+content-length: 73
+content-type: application/json
+date: Mon, 20 Sep 2021 15:43:18 GMT
+server: uvicorn
 
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.5
+Connection: keep-alive
+DNT: 1
+Host: 127.0.0.1:8000
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Sec-GPC: 1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0
 
+```
+
+3. Query URL: `http://127.0.0.1:8000/predict?review_qry_string=%22This%20is%20the%20worse%20business!%22`. Query string: 
+"This is the worse business!". Result: `{"prediction_label":"negative","prediction_confidence":6.614949703216553}`.
+HTTP Response header: 
+```
+content-length: 73
+content-type: application/json
+date: Mon, 20 Sep 2021 15:46:20 GMT
+server: uvicorn
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.5
+Connection: keep-alive
+DNT: 1
+Host: 127.0.0.1:8000
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Sec-GPC: 1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0
+```
