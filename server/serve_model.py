@@ -20,6 +20,9 @@ from model.keras_sequence_model_weights import KerasSequenceModelWeights
 
 
 class ModelBuildAndPredict:
+    """
+
+    """
     def __init__(self, weights_file_path):
         self.__weights_file_path = weights_file_path
         self.__model_predict = None

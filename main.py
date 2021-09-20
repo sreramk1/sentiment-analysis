@@ -13,8 +13,6 @@
 # limitations under the License.
 ##########################################################################
 
-from typing import Optional
-
 from fastapi import FastAPI
 
 from server.serve_model import ModelBuildAndPredict
