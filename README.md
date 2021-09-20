@@ -77,3 +77,7 @@ Most of my efforts were directed towards trying out different loss functions, an
 first tried the model with uni-directional LSTM and then realized that a bidirectional LSTM (where you will have two 
 sets of time series, one in the forward direction: from `t` to `t+t_final`, and from `t+t_final` to `t`). Bidirectional
 was observed to be better. 
+
+## Demonstration Video: 
+
+You can view the demo here: https://www.youtube.com/watch?v=hHE3d7rmNaM
