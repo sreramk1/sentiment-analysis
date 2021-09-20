@@ -75,5 +75,5 @@ User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Fire
 
 Most of my efforts were directed towards trying out different loss functions, and I had to finally settle with RELU. I 
 first tried the model with uni-directional LSTM and then realized that a bidirectional LSTM (where you will have two 
-sets of time series, one in the forward direction: from `t` to `t+t_final`, and from `t_final` to `t`). Bidirectional
+sets of time series, one in the forward direction: from `t` to `t+t_final`, and from `t+t_final` to `t`). Bidirectional
 was observed to be better. 
