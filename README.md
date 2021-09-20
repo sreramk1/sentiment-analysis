@@ -24,7 +24,7 @@ As we can see from the second Notebook: The last training loss was `loss: 0.0184
 ### Results from a few evaluations:
 (The query was executed from the Server, by making the HTTP GET calls through the browser)
 1. Query URL: `http://127.0.0.1:8000/predict?review_qry_string=%22This%20is%20a%20great%20business!%22`. Query string:
-"This is a great business!". Result: `{"prediction_label":"positive","prediction_confidence":2.872779130935669}`. 
+_"This is a great business!"_. Result: `{"prediction_label":"positive","prediction_confidence":2.872779130935669}`. 
 HTTP Response header:
 ```
 content-length: 73
@@ -48,7 +48,7 @@ User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Fire
 
 ```
 2. Query URL: `http://127.0.0.1:8000/predict?review_qry_string=%22This%20is%20the%20worse%20business!%22`. Query string: 
-"This is the worse business!". Result: `{"prediction_label":"negative","prediction_confidence":6.614949703216553}`.
+_"This is the worse business!"_. Result: `{"prediction_label":"negative","prediction_confidence":6.614949703216553}`.
 HTTP Response header: 
 ```
 content-length: 73
