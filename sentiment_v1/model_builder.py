@@ -25,7 +25,7 @@ TfDsStoreMaxTokensAndLayeredWeightsAreNoneError = Exception("tf_ds_store, layere
 class SentimentLSTMDense64Dense32Dense16Dense8Dense1(ModelBuilderBase):
 
     def __init__(self,
-                 tf_ds_store: DataSetBase,
+                 tf_ds_store: DataSetBase = None,
                  max_tokens=None,
                  layered_weights=None):
         self.__tf_ds_store = tf_ds_store
