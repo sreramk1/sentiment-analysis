@@ -47,8 +47,7 @@ Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0
 
 ```
-
-3. Query URL: `http://127.0.0.1:8000/predict?review_qry_string=%22This%20is%20the%20worse%20business!%22`. Query string: 
+2. Query URL: `http://127.0.0.1:8000/predict?review_qry_string=%22This%20is%20the%20worse%20business!%22`. Query string: 
 "This is the worse business!". Result: `{"prediction_label":"negative","prediction_confidence":6.614949703216553}`.
 HTTP Response header: 
 ```
