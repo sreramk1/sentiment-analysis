@@ -143,6 +143,3 @@ class TweetReviewCsvToPdDataFrame(DataSetBase):
         self.__train_ds = None
         self.__validate_ds = None
 
-
-if __name__ == "__main__":
-    print(TweetReviewCsvToPdDataFrame._TweetReviewReaderCSV__filter_numbers("hello world a23344b ", replace_with=''))
