@@ -90,6 +90,7 @@ class SentimentLSTMDense64Dense32Dense16Dense8Dense1(ModelBuilderBase):
                     output_dim=embedding_output_dimensions,
                     # Use masking to handle the variable sequence lengths
                     mask_zero=mask_zero),
+
                 tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)),
 
                 tf.keras.layers.Dense(dense_layer_1_units, activation=dense_activation),
