@@ -41,7 +41,7 @@ confidence the model has on its response.
         model_build_and_predict = ModelBuildAndPredict("trained_weights/weights_20-9-2021.json")
         model_build_and_predict.build_model()
 
-        @self.__app.get("/sentiment_v1/predict", tags=["review_qry_string"], )
+        @self.__app.get("/predict", tags=["review_qry_string"], )
         def read_item(review_qry_string: str):
             """
                 Accepts the argument review_qry_string and computes the sentiment from it.
